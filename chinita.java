@@ -14,16 +14,12 @@ public class chinita extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     String direccion = "norte";
-    int[] caminos = null;
+    //int[] caminos = null;
     List recorrido = null;
+    List vecinos;
     public void act() 
     {
-        List vecinos = getNeighbours(1, false, camino.class);
-      	for(int i = 0; i < 4; i++){
-      	    if(vecinos.get(i) != null){
-      	        
-      	    }
-      	}
+      	
     }
     
     public void izquierda(){
