@@ -25,6 +25,7 @@ public class MyWorld extends World
         setBackground("tierra.png");
         prepare();
         crearLaberinto();
+        caminos();
     }
 
     public void crearLaberinto(){
@@ -110,10 +111,8 @@ public class MyWorld extends World
                   
               }
           }
+          
          }
-          
-          
-        
      
     public boolean sePuedePonerRocaV(int lugar,int nRoca){
            //declaracion de variable random
@@ -132,6 +131,7 @@ public class MyWorld extends World
        roca roca = new roca();
        addObject(roca,hor,ver);
     }
+    
     public void relleno(int horizontal,int vertical){
        caso=Greenfoot.getRandomNumber(3)+1;
         switch(caso){
@@ -154,6 +154,17 @@ public class MyWorld extends World
                 }
                 
                 break;
+        }
+    }
+    
+    public void caminos(){
+        for(int a = 1; a < 15; a++){
+            for(int b = 0; b < 25; b++){
+                if(getObjectsAt(a,b,null) == null){
+                    camino camino = new camino();
+                    addObject(camino,a,b);
+                }
+            }
         }
     }
    
