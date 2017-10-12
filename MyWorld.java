@@ -111,7 +111,6 @@ public class MyWorld extends World
                   
               }
           }
-          
          }
      
     public boolean sePuedePonerRocaV(int lugar,int nRoca){
