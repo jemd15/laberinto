@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class MyWorld here.
@@ -157,9 +158,9 @@ public class MyWorld extends World
     }
     
     public void caminos(){
-        for(int a = 1; a < 15; a++){
-            for(int b = 0; b < 25; b++){
-                if(getObjectsAt(a,b,null) == null){
+        for(int a = 0; a < 25; a++){
+            for(int b = 1; b < 15; b++){
+                if(getObjectsAt(a,b,null).isEmpty() == true){
                     camino camino = new camino();
                     addObject(camino,a,b);
                 }

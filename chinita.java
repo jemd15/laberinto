@@ -18,9 +18,9 @@ public class chinita extends Actor
     List recorrido = null;
     public void act() 
     {
-        List vecinos = getNeighbours(1, false, null);
+        List vecinos = getNeighbours(1, false, camino.class);
       	for(int i = 0; i < 4; i++){
-      	    if(vecinos.get(i) == null){
+      	    if(vecinos.get(i) != null){
       	        
       	    }
       	}
