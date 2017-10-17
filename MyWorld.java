@@ -1,20 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
-/**
- * Write a description of class MyWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class MyWorld extends World
 {
-
-    /**
-     * Constructor for objects of class MyWorld.
-     * 
-     */
-    
     public int y,noRocaV1,noRocaV2,noRocaH1,noRocaH2,caso,i;
     public int x;
     public int hor,ver,vertical,h;
@@ -30,14 +18,11 @@ public class MyWorld extends World
     }
 
     public void crearLaberinto(){
-          
           ver=7;
-          
           noRocaH2=Greenfoot.getRandomNumber(9)+14;
           noRocaH1=Greenfoot.getRandomNumber(11)+1;
           for(int hor=1;hor<24;hor++){
                 switch(hor){
-                    
                     case 6 :    
                         noRocaV1=Greenfoot.getRandomNumber(5)+1;  //asignacion de numero random 1 a 6
                         noRocaV2=Greenfoot.getRandomNumber(6)+8;
@@ -77,7 +62,6 @@ public class MyWorld extends World
                 }
                 }
                 if(ver==7){
-               
               for(int horizontal=1;horizontal<24;horizontal++){
                   
                   if(sePuedePonerRocaV(horizontal,noRocaH1)!=false&&horizontal<6){
@@ -90,7 +74,6 @@ public class MyWorld extends World
                       }
                   }else{
                       if(sePuedePonerRocaV(horizontal,noRocaH1)!=false&&horizontal>6&&horizontal<12){
-                       
                         colocarRoca(horizontal,ver);
                         for(int vertical=1;vertical<6;vertical++){
                             relleno(horizontal,vertical);
@@ -109,22 +92,16 @@ public class MyWorld extends World
                         }
                       }
                   }
-                  
               }
           }
          }
      
     public boolean sePuedePonerRocaV(int lugar,int nRoca){
-           //declaracion de variable random
-        
         if(nRoca != lugar){
             return true;
         }else{
-            
             return false;
-          
         }
-        
     }
     
     public void colocarRoca(int hor,int ver){
@@ -136,23 +113,19 @@ public class MyWorld extends World
        caso=Greenfoot.getRandomNumber(3)+1;
         switch(caso){
            case 1 :
-               
                 if(horizontal!=1&&horizontal!=5&&horizontal!=4&&horizontal!=7&&horizontal!=11&&horizontal!=10&&horizontal!=13&&horizontal!=17&&horizontal!=16&&horizontal!=18&&horizontal!=19&&horizontal!=22&&horizontal!=23){
                      colocarRoca(horizontal,vertical);
                 }
-                
                break;
            case 2 :
                 if(horizontal!=2&&horizontal!=5&&horizontal!=1&&horizontal!=7&&horizontal!=8&&horizontal!=12&&horizontal!=11&&horizontal!=13&&horizontal!=14&&horizontal!=17&&horizontal!=18&&horizontal!=19&&horizontal!=20&&horizontal!=23){
                      colocarRoca(horizontal,vertical);
                 }
-                
                 break;
            case 3 :
                 if(horizontal!=1&&horizontal!=5&&horizontal!=3&&horizontal!=7&&horizontal!=11&&horizontal!=9&&horizontal!=13&&horizontal!=17&&horizontal!=16&&horizontal!=19&&horizontal!=18&&horizontal!=23&&horizontal!=22){
                      colocarRoca(horizontal,vertical);
                 }
-                
                 break;
         }
     }
@@ -174,6 +147,8 @@ public class MyWorld extends World
      */
     private void prepare()
     {
+        salida salida = new salida();
+        addObject(salida,5,0);
         chinita chinita = new chinita();
         addObject(chinita,20,14);
         roca roca = new roca();

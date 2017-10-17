@@ -1,92 +1,67 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Stack;
 
-/**
- * Write a description of class chinita here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class chinita extends Actor
 {
-    /**
-     * Act - do whatever the chinita wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     String direccion = "norte";
-    List recorrido = null;
+    List<camino> vecinos = new ArrayList<camino>();
+    List<salida> fin = new ArrayList<salida>();
+    Stack<rastro> recorrido = new Stack<rastro>();
+    int cantidadVecinos = 0;
+    int[] caminoElegido = new int[4];
+    
     public void act() 
     {
-        List<camino> vecinos = getNeighbours(1,false,camino.class);
+        fin = getNeighbours(1,false,salida.class);
+        
+        if(fin.size() > 0){
+            int x = getX();
+            int y = getY();
+            rastro rastro = new rastro();
+            recorrido.push(rastro);
+            getWorld().addObject(rastro, x,y);
+            setLocation(fin.get(0).getX(),fin.get(0).getY());
+            System.out.println("FIN");
+            Greenfoot.stop();
+        }else {
+            vecinos = getNeighbours(1,false,camino.class);
+            mover(elegirCamino(vecinos));
+        }
+    }
+    
+    public int[] elegirCamino(List<camino> vecinos){
+        if(vecinos.size() > 0){
+            cantidadVecinos = vecinos.size();
+            int rnd = Greenfoot.getRandomNumber(cantidadVecinos);
+            caminoElegido[0] = vecinos.get(rnd).getX();
+            caminoElegido[1] = vecinos.get(rnd).getY();
+            System.out.println("avanzando");
+            return caminoElegido;
+        }else{
+            caminoElegido[0] = recorrido.peek().getX();
+            caminoElegido[1] = recorrido.pop().getY();
+            getWorld().removeObjects(getWorld().getObjectsAt(caminoElegido[0],caminoElegido[1],rastro.class));
+            System.out.println("devolviendose");
+            int x = caminoElegido[0];
+            int y = caminoElegido[1];
+            setLocation(x,y);
+            return null;
+        }
+    }
+    
+    public void mover(int[] caminoElegido){
         int x = getX();
         int y = getY();
-    }
-    
-    public void izquierda(){
-      int x = getX();
-      int y = getY();
-      x--;
-      if(direccion.equals("norte")){
-          turn(-90);
-      }else if(direccion.equals("este")){
-          turn(-180);
-      }else if(direccion.equals("oeste")){
-
-      }else if(direccion.equals("sur")){
-          turn(90);
-      }
-      direccion = "oeste";
-      setLocation(x,y);
-    }
-    
-    public void derecha(){
-      int x = getX();
-      int y = getY();
-      x++;
-      if(direccion.equals("norte")){
-          turn(90);
-      }else if(direccion.equals("este")){
-
-      }else if(direccion.equals("oeste")){
-          turn(180);
-      }else if(direccion.equals("sur")){
-          turn(-90);
-      }
-      direccion = "este";
-      setLocation(x,y);
-    }
-    
-    public void bajar(){
-      int x = getX();
-      int y = getY();
-      y++;
-      if(direccion.equals("norte")){
-          turn(180);
-      }else if(direccion.equals("este")){
-          turn(90);
-      }else if(direccion.equals("oeste")){
-          turn(-90);
-      }else if(direccion.equals("sur")){
-          
-      }
-      direccion = "sur";
-      setLocation(x,y);
-    }
-    
-    public void subir (){
-      int x = getX();
-      int y = getY();
-      y--;
-      if(direccion.equals("norte")){
-
-      }else if(direccion.equals("este")){
-          turn(-90);
-      }else if(direccion.equals("oeste")){
-          turn(90);
-      }else if(direccion.equals("sur")){
-          turn(180);
-      }
-      direccion = "norte";
-      setLocation(x,y);
+        if(caminoElegido != null){
+            rastro rastro = new rastro();
+            recorrido.push(rastro);
+            getWorld().removeObjects(getWorld().getObjectsAt(caminoElegido[0],caminoElegido[1],camino.class));
+            getWorld().addObject(rastro, x,y);
+            setLocation(caminoElegido[0],caminoElegido[1]);
+        }else{
+            
+        }
     }
 }
